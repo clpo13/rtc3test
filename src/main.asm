@@ -4,7 +4,7 @@ MainMenu:
 	rst ClearScreen
 	coord de, 2, 0
 	ld hl, .title
-	rst Print
+	rst Print_
 	coord de, 2, 2
 	ld c, (Menus.end - Menus) / 4
 	ld hl, Menus
@@ -13,7 +13,7 @@ MainMenu:
 	push hl
 	ld h, [hl]
 	ld l, a
-	rst Print
+	rst Print_
 	pop hl
 	inc hl
 	inc hl
@@ -25,7 +25,7 @@ MainMenu:
 	jr nz, .entry_loop
 	ld hl, .bottom
 	coord de, 2, 17
-	rst Print
+	rst Print_
 	call .print_cursor_position
 	ld c, (Menus.end - Menus) / 4
 	rst EnableScreen
@@ -54,7 +54,7 @@ MainMenu:
 	ld b, 0
 .no_bottom_wrap
 	rst WaitVBlank
-	ld [hl], " "
+	ld [hl], ' '
 	call .print_cursor_position
 	jr .menu_loop
 
@@ -80,7 +80,7 @@ MainMenu:
 		add hl, hl
 	endr
 	add hl, de
-	ld [hl], ">"
+	ld [hl], '>'
 	ret
 
 .title
@@ -108,7 +108,7 @@ RunTests:
 	rra
 	ld e, a
 	ld d, $9c
-	rst Print
+	rst Print_
 	rst EnableScreen
 	pop hl
 	inc hl
@@ -127,13 +127,13 @@ RunTests:
 	jr z, .done
 	res 7, h
 	rst WaitVBlank
-	rst Print
+	rst Print_
 	pop hl
 	ld a, [hli]
 	push hl
 	add a, a
 	jr nc, .same_line
-	ld a, ":"
+	ld a, ':'
 	ld [de], a
 	rst NextLine
 .same_line
@@ -142,7 +142,7 @@ RunTests:
 	or 17
 	ld e, a
 	ld hl, .dots
-	rst Print
+	rst Print_
 	pop hl
 	ld a, [hli]
 	push hl
@@ -167,7 +167,7 @@ RunTests:
 	res 2, e
 	rst WaitVBlank
 	ld hl, .clear_dots
-	rst Print
+	rst Print_
 	ld hl, hTestResult
 	ld a, c
 	call PrintResult
@@ -184,7 +184,7 @@ RunTests:
 	dec e
 	ld hl, .not_applicable
 	rst WaitVBlank
-	rst Print
+	rst Print_
 	jr .next_test
 
 .done
@@ -192,7 +192,7 @@ RunTests:
 	coord de, 6, 17
 	ld hl, .return
 	rst WaitVBlank
-	rst Print
+	rst Print_
 .return_loop
 	call WaitForButtonPress
 	and a

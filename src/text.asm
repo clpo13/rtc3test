@@ -6,8 +6,8 @@ PassFailResult:
 	ld hl, FailString
 .ok
 	ld de, hTestResult
-	rst Print
-	ld a, "@"
+	rst Print_
+	ld a, '@'
 	ld [de], a
 	pop af
 	ret
@@ -30,7 +30,7 @@ FailedRegistersResult:
 	add a, a
 	lb bc, 6, LOW(hTestResult + 5)
 	ld d, a
-	ld a, " "
+	ld a, ' '
 	ldh [hTestResult + 4], a
 	ld hl, .letters
 .loop
@@ -72,16 +72,16 @@ PrintTime:
 	inc e
 .ok
 	add hl, de
-	ld a, "@"
+	ld a, '@'
 	ld [hld], a
-	ld a, "s"
+	ld a, 's'
 	ld [hld], a
-	ld a, "m"
+	ld a, 'm'
 	ld [hld], a
 	ld a, 10
 	call Divide
 	ld [hld], a
-	ld a, "."
+	ld a, '.'
 	ld [hld], a
 .loop
 	ld a, 10
@@ -98,8 +98,8 @@ PrintTime:
 	ld d, h
 	ld e, l
 	ld hl, TimeoutString
-	rst Print
-	ld a, "@"
+	rst Print_
+	ld a, '@'
 	ld [de], a
 	pop hl
 	pop de
@@ -111,8 +111,8 @@ TimeoutString:
 TimeoutResult:
 	ld hl, TimeoutString
 	ld de, hTestResult
-	rst Print
-	ld a, "@"
+	rst Print_
+	ld a, '@'
 	ld [de], a
 	scf
 	ret

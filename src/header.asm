@@ -14,13 +14,13 @@ WaitVBlank:
 	xor a
 	jr WaitVBlankLoop
 
-Print:
+Print_:
 	ld a, [hli]
-	cp "@"
+	cp '@'
 	ret z
 	ld [de], a
 	inc de
-	jr Print
+	jr Print_
 
 ClearScreen:
 	; turns off the LCD as well
@@ -150,7 +150,7 @@ PrintResult:
 	ld [de], a
 	inc de
 	ld a, [hli]
-	cp "@"
+	cp '@'
 	jr nz, .loop
 	pop bc
 	ret
